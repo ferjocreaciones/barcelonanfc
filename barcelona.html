@@ -1,0 +1,280 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FC Barcelona NFC</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #0A0A0A, #001f3f);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+}
+
+.card-fc {
+    position: relative;
+    width: 90%;
+    max-width: 320px;
+    height: 480px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(200,16,46,0.7);
+}
+
+.card-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(135deg, rgba(165,0,68,0.9), rgba(0,77,152,0.9)),
+        repeating-linear-gradient(
+            45deg,
+            #A50044,
+            #A50044 20px,
+            #004D98 20px,
+            #004D98 40px
+        );
+    z-index: 1;
+}
+
+.card-player {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-height: 320px;
+    object-fit: contain;
+    z-index: 2;
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.8));
+    z-index: 3;
+}
+
+.card-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-details {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.card-details span {
+    background: rgba(0,0,0,0.6);
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+/* BOTONES */
+.btn {
+    display: block;
+    margin: 10px auto;
+    padding: 15px;
+    width: 90%;
+    max-width: 400px;
+    background: #004D98;
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #003366;
+}
+
+/* PREMIUM */
+.btn-premium {
+    display: block;
+    width: 90%;
+    max-width: 320px;
+    margin: 25px auto;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: #111;
+    text-decoration: none;
+    border-radius: 15px;
+
+    background: linear-gradient(135deg,#FFD700,#FFC300,#FFB300,#FFD700);
+}
+
+.separador {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #A50044, #004D98);
+    margin: 25px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card-fc">
+    <div class="card-bg"></div>
+
+    <img id="player-img" class="card-player" src="">
+
+    <div class="card-info">
+        <div id="player-name" class="card-name"></div>
+        <div class="card-details">
+            <span id="player-position"></span>
+            <span id="player-number"></span>
+        </div>
+    </div>
+</div>
+
+<!-- BOTONES PREMIUM -->
+<div id="premium-container">
+    <a id="btn-premium-1" class="btn-premium" target="_blank">⭐ Instagram</a>
+    <a id="btn-premium-2" class="btn-premium" target="_blank">🎥 Goles</a>
+    <a id="btn-premium-3" class="btn-premium" target="_blank">📊 Perfil</a>
+</div>
+
+<div class="separador"></div>
+
+<a class="btn" href="https://www.fcbarcelona.com" target="_blank">🌐 Sitio Oficial</a>
+<a class="btn" href="https://www.youtube.com/@FCBarcelona" target="_blank">▶️ YouTube Oficial</a>
+<a class="btn" href="https://www.instagram.com/fcbarcelona/" target="_blank">📸 Instagram Oficial</a>
+<a class="btn" href="https://www.fcbarcelona.com/en/tickets" target="_blank">🎟️ Boletos</a>
+<a class="btn" href="https://store.fcbarcelona.com/" target="_blank">🛒 Tienda Oficial</a>
+
+<div class="separador"></div>
+
+<a class="btn" href="https://www.google.com/search?q=barcelona+proximo+partido" target="_blank">📅 Próximo Partido</a>
+<a class="btn" href="https://www.google.com/search?q=barcelona+calendario" target="_blank">🗓️ Calendario</a>
+<a class="btn" href="https://www.google.com/search?q=tabla+la+liga" target="_blank">📊 Tabla La Liga</a>
+
+<div class="separador"></div>
+
+<a class="btn" href="https://www.google.com/search?q=palmares+barcelona" target="_blank">🏆 Palmarés</a>
+<a class="btn" href="https://www.google.com/search?q=barcelona+vs+real+madrid+historial" target="_blank">⚔️ El Clásico</a>
+
+</div>
+
+<script>
+
+// 🔥 BASE ESCALABLE
+const jugadores = {
+
+    raphinha: {
+        nombre: "Raphinha",
+        numero: "11",
+        posicion: "DEL",
+        imagen: "images/raphinha.jpg",
+        premiumLinks: [
+            "https://www.instagram.com/raphinha/",
+            "https://www.youtube.com/results?search_query=raphinha+goals",
+            "https://www.google.com/search?q=raphinha+estadisticas"
+        ]
+    },
+
+    yamal: {
+        nombre: "Lamine Yamal",
+        numero: "27",
+        posicion: "DEL",
+        imagen: "images/yamal.jpg",
+        premiumLinks: [
+            "https://www.instagram.com/lamineyamal/",
+            "https://www.youtube.com/results?search_query=lamine+yamal+goals",
+            "https://www.google.com/search?q=lamine+yamal+estadisticas"
+        ]
+    },
+
+    lewandowski: {
+        nombre: "Robert Lewandowski",
+        numero: "9",
+        posicion: "DEL",
+        imagen: "images/lewandowski.jpg",
+        premiumLinks: [
+            "https://www.instagram.com/_rl9/",
+            "https://www.youtube.com/results?search_query=lewandowski+goals",
+            "https://www.google.com/search?q=lewandowski+estadisticas"
+        ]
+    },
+
+    olmo: {
+        nombre: "Dani Olmo",
+        numero: "20",
+        posicion: "MED",
+        imagen: "images/olmo.jpg",
+        premiumLinks: [
+            "https://www.instagram.com/daniolmo/",
+            "https://www.youtube.com/results?search_query=dani+olmo+goals",
+            "https://www.google.com/search?q=dani+olmo+estadisticas"
+        ]
+    },
+
+    ferran: {
+        nombre: "Ferran Torres",
+        numero: "7",
+        posicion: "DEL",
+        imagen: "images/ferran.jpg",
+        premiumLinks: [
+            "https://www.instagram.com/ferrantorres/",
+            "https://www.youtube.com/results?search_query=ferran+torres+goals",
+            "https://www.google.com/search?q=ferran+torres+estadisticas"
+        ]
+    },
+
+    pedri: {
+        nombre: "Pedri",
+        numero: "8",
+        posicion: "MED",
+        imagen: "images/pedri.jpg",
+        premiumLinks: [
+            "https://www.instagram.com/pedri/",
+            "https://www.youtube.com/results?search_query=pedri+goals",
+            "https://www.google.com/search?q=pedri+estadisticas"
+        ]
+    }
+
+};
+
+// 🔥 MOTOR
+const params = new URLSearchParams(window.location.search);
+const jugador = params.get("jugador");
+
+if (jugadores[jugador]) {
+
+    document.getElementById("player-name").innerText = jugadores[jugador].nombre;
+    document.getElementById("player-number").innerText = jugadores[jugador].numero;
+    document.getElementById("player-position").innerText = jugadores[jugador].posicion;
+    document.getElementById("player-img").src = jugadores[jugador].imagen;
+
+    document.getElementById("btn-premium-1").href = jugadores[jugador].premiumLinks[0];
+    document.getElementById("btn-premium-2").href = jugadores[jugador].premiumLinks[1];
+    document.getElementById("btn-premium-3").href = jugadores[jugador].premiumLinks[2];
+
+} else {
+    document.getElementById("player-name").innerText = "FC Barcelona";
+    document.getElementById("player-number").innerText = "🔵🔴";
+}
+
+</script>
+
+</body>
+</html>
